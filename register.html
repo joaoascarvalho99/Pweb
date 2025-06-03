@@ -47,8 +47,34 @@
       <p>&copy; 2025 Jornal Online - Todos os direitos reservados</p>
     </footer>
   </div>
-  <script>
-    console.log('Register page loaded');
-  </script>
+<!-- Substitui o script no final do register.html -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const supabaseUrl = 'https://seu-projeto.supabase.co'
+  const supabaseKey = 'tua-chave-publica-supabase'
+  const supabase = supabase.createClient(supabaseUrl, supabaseKey)
+
+  document.querySelector('form').addEventListener('submit', async (e) => {
+    e.preventDefault()
+    
+    const email = document.getElementById('new-username').value
+    const password = document.getElementById('new-password').value
+    
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password
+      })
+      
+      if (error) throw error
+      
+      alert('Registo bem-sucedido! Por favor verifique o seu email.')
+      window.location.href = '../login.html'
+    } catch (error) {
+      alert('Erro no registo: ' + error.message)
+      console.error('Erro no registo:', error)
+    }
+  })
+</script>
 </body>
 </html>

@@ -63,3 +63,28 @@ nav a {
 footer p {
   text-align: center;
 }
+/* Adiciona isto ao index.css */
+#auth-section {
+  float: right;
+}
+
+.error {
+  color: #ff3333;
+  padding: 10px;
+  border: 1px solid #ff3333;
+  border-radius: 4px;
+  background: #ffeeee;
+}
+
+.success {
+  color: #33aa33;
+  padding: 10px;
+  border: 1px solid #33aa33;
+  border-radius: 4px;
+  background: #eeffee;
+}
+
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
