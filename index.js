@@ -1,5 +1,5 @@
 const apiKey = '026d29804f15482e9e8546172f41bfb1';
-const url = `https://newsapi.org/v2/top-headlines?country=us&pageSize=26&apiKey=${apiKey}`;
+const url = `https://newsapi.org/v2/top-headlines?country=us&pageSize=50&apiKey=${apiKey}`;
 
 fetch(url)
   .then(response => response.json())
@@ -9,25 +9,39 @@ fetch(url)
     newsContainer.innerHTML = '';
 
     if (data.articles && data.articles.length > 0) {
-      const main = data.articles[0];
+      const validArticles = data.articles.filter(article =>
+        article.title && article.description && article.urlToImage
+      );
+
+      if (validArticles.length === 0) {
+        highlight.innerText = 'Nenhuma notícia válida disponível de momento.';
+        return;
+      }
+
+      const main = validArticles[0];
       highlight.innerHTML = `
-        ${main.urlToImage ? `<img src="${main.urlToImage}" alt="Imagem da notícia">` : ''}
+        <img src="${main.urlToImage}" alt="Imagem da notícia">
         <h3>${main.title}</h3>
-        <p>${main.description || 'Sem descrição disponível.'}</p>
+        <p>${main.description}</p>
+        <p class="fonte">Fonte: ${main.source.name}</p>
+        <p class="data">Publicado em: ${new Date(main.publishedAt).toLocaleDateString('pt-PT')}</p>
         <a href="${main.url}" target="_blank">Ler mais</a>
       `;
 
-      data.articles.slice(1).forEach(article => {
+      validArticles.slice(1, 26).forEach(article => {
         const newsItem = document.createElement('article');
         newsItem.className = 'news-item';
         newsItem.innerHTML = `
-          ${article.urlToImage ? `<img src="${article.urlToImage}" alt="Imagem da notícia">` : ''}
+          <img src="${article.urlToImage}" alt="Imagem da notícia">
           <h3>${article.title}</h3>
-          <p>${article.description || 'Sem descrição disponível.'}</p>
+          <p>${article.description}</p>
+          <p class="fonte">Fonte: ${article.source.name}</p>
+          <p class="data">Publicado em: ${new Date(article.publishedAt).toLocaleDateString('pt-PT')}</p>
           <a href="${article.url}" target="_blank">Ler mais</a>
         `;
         newsContainer.appendChild(newsItem);
       });
+
     } else {
       highlight.innerText = 'Nenhuma notícia disponível de momento.';
     }
