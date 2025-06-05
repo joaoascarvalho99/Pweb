@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Site de Notícias</title>
-  <link rel="stylesheet" href="index.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jornal Online</title>
+  <link rel="stylesheet" href="index.css" />
 </head>
 <body>
 
@@ -13,19 +13,19 @@
     <p>As últimas notícias de Portugal e do mundo</p>
   </header>
 
-<nav>
-  <a href="#">Início</a>
-  <a href="#">Política</a>
-  <a href="#">Desporto</a>
-  <a href="#">Economia</a>
-  <a href="#">Tecnologia</a>
-  <div id="auth-section" style="display: inline;">
-    <a href="login.html" id="login-link">Login</a>
-    <a href="register.html" id="register-link">Registar</a>
-    <a href="#" id="logout-link" style="display: none;">Logout</a>
-    <span id="user-email" style="color: white; margin-left: 10px;"></span>
-  </div>
-</nav>
+  <nav>
+    <a href="#">Início</a>
+    <a href="#">Política</a>
+    <a href="#">Desporto</a>
+    <a href="#">Economia</a>
+    <a href="#">Tecnologia</a>
+    <div id="auth-section" style="display: inline;">
+      <a href="login.html" id="login-link">Login</a>
+      <a href="register.html" id="register-link">Registar</a>
+      <a href="#" id="logout-link" style="display: none;">Logout</a>
+      <span id="user-email" style="color: #eee; font-weight: bold; margin-left: 10px;"></span>
+    </div>
+  </nav>
 
   <div class="container">
     <section class="highlight">
@@ -42,6 +42,9 @@
     <p>&copy; 2025 Jornal Online - Todos os direitos reservados</p>
   </footer>
 
+  <!-- Supabase JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- O teu script principal -->
   <script src="index.js"></script>
 </body>
 </html>

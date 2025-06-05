@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registre-se - Jornal Online</title>
+  <title>Registo - Jornal Online</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: Arial, sans-serif; background: #f4f4f4; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
@@ -12,9 +12,16 @@
     h2 { text-align: center; margin-bottom: 1rem; color: #444; }
     form { display: flex; flex-direction: column; }
     label { margin-bottom: 0.3rem; font-weight: bold; color: #333; }
-    input[type="text"], input[type="password"] { padding: 0.6rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 4px; transition: border-color 0.2s; }
+    input[type="email"], input[type="password"] {
+      padding: 0.6rem; margin-bottom: 1rem; border: 1px solid #ccc;
+      border-radius: 4px; transition: border-color 0.2s;
+    }
     input:focus { border-color: #666; }
-    button { background: #444; color: white; border: none; padding: 0.7rem; border-radius: 4px; cursor: pointer; transition: background 0.3s; }
+    button {
+      background: #444; color: white; border: none;
+      padding: 0.7rem; border-radius: 4px; cursor: pointer;
+      transition: background 0.3s;
+    }
     button:hover { background: #333; }
     p { text-align: center; margin-top: 1rem; font-size: 0.9rem; }
     p a { color: #444; text-decoration: none; font-weight: bold; }
@@ -29,52 +36,61 @@
     </header>
 
     <section>
-      <h2>Registre-se</h2>
-      <form>
-        <label for="new-username">Nome de usuário</label>
-        <input type="text" id="new-username" placeholder="Escolha um nome de usuário" required>
+      <h2>Registo</h2>
+      <form id="signup-form">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="O seu email" required />
 
-        <label for="new-password">Senha</label>
-        <input type="password" id="new-password" placeholder="Escolha uma senha" required>
+        <label for="password">Senha</label>
+        <input type="password" id="password" placeholder="Crie uma senha" required />
 
         <button type="submit">Criar conta</button>
       </form>
 
-      <p>Já tem uma conta? <a href="../login.html">Faça login</a></p>
+      <p>Já tem conta? <a href="login.html">Faça login</a></p>
     </section>
 
     <footer>
       <p>&copy; 2025 Jornal Online - Todos os direitos reservados</p>
     </footer>
   </div>
-<!-- Substitui o script no final do register.html -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  const supabaseUrl = 'https://seu-projeto.supabase.co'
-  const supabaseKey = 'tua-chave-publica-supabase'
-  const supabase = supabase.createClient(supabaseUrl, supabaseKey)
 
-  document.querySelector('form').addEventListener('submit', async (e) => {
-    e.preventDefault()
-    
-    const email = document.getElementById('new-username').value
-    const password = document.getElementById('new-password').value
-    
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password
-      })
-      
-      if (error) throw error
-      
-      alert('Registo bem-sucedido! Por favor verifique o seu email.')
-      window.location.href = '../login.html'
-    } catch (error) {
-      alert('Erro no registo: ' + error.message)
-      console.error('Erro no registo:', error)
-    }
+  <!-- Biblioteca Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Script JS -->
+<!-- Biblioteca Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- Script JS -->
+<!-- Biblioteca Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const supabaseUrl = 'https://hejstpwldvkkunybbycb.supabase.co'
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhlanN0cHdsZHZra3VueWJieWNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg1MjM5MjksImV4cCI6MjA2NDA5OTkyOX0.dE3_lTANaaPm8kF88YxOLXC-AUbT4pW-odvOJBKddl8'
+    const client = window.supabase.createClient(supabaseUrl, supabaseKey)
+
+    document.getElementById('signup-form').addEventListener('submit', async (e) => {
+      e.preventDefault()
+
+      const email = document.getElementById('email').value
+      const password = document.getElementById('password').value
+
+      const { data, error } = await client.auth.signUp({ email, password })
+
+      if (error) {
+        alert('Erro no registo: ' + error.message)
+        console.error(error)
+      } else {
+        alert('Registo bem-sucedido! Verifique o seu email.')
+        window.location.href = 'login.html'
+      }
+    })
   })
 </script>
+
+
 </body>
 </html>
